@@ -4,9 +4,9 @@
 #include <Adafruit_GFX.h>
 #include <Fonts/FreeSans9pt7b.h>
 #include <Fonts/FreeMonoOblique9pt7b.h>
-#include  <DHT.h>
+#include <DHT.h>
 #define SCREEN_WIDTH 128 
-#define  SCREEN_HEIGHT 64 
+#define SCREEN_HEIGHT 64 
 
 #define OLED_RESET     4  
 Adafruit_SH1106 display(OLED_RESET);
@@ -77,7 +77,8 @@ void setup() {
 }
 
 void loop() {
-
+// only one mode can be active at a time - other needs to be commented out
+// 1) connected mode: device is connected to a laptop and data is visualized real time on the screen
   String dataToSend = "Gas:" + String(gasLevel) +
                       ",Quality:" + air_sensor() + 
                       ",Temp:" + String(dht.readTemperature()) +
@@ -86,6 +87,28 @@ void loop() {
                       ;
 
   Serial.print(dataToSend);
+
+// 2) standalone mode: device operates independently of laptop and data is visualized real time on the device's display
+  display.clearDisplay();
+
+  display.setTextSize(1);
+  display.setCursor(0,18);
+  display.println("Air Quality:" + air_sensor());
+
+  display.setTextSize(1);
+  display.setCursor(1, 40);
+  display.println(sendTemp());
+
+  display.setCursor(114, 40);
+  display.println("");
+
+  display.setCursor(1,  53);
+  display.println(sendHumidity());
+  display.setCursor(114, 53);
+  display.println("");
+
+  display.display();
+  delay(100000);
 
 }
 
