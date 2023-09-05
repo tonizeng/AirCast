@@ -3,4 +3,4 @@ AirCast is a portable device that uses an Arduino Uno and sensors to monitor out
 The Arduino file contains code to process sensor outputs, and contains the option to display data directly on the device interface, or send data to a Python file through an external USB connection.
 The python file contains code that visualizes data in real time on a plot on a connected device.
 
-
+![ac1](https://github.com/tonizeng/AirCast/assets/121732482/3f46c936-af24-41bc-96e9-30b4802e6632)
